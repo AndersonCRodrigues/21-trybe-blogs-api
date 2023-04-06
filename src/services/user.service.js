@@ -25,4 +25,7 @@ const create = async ({ displayName, email, password, image = null }) => {
 
 const getAll = async () => User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
 
-module.exports = { login, create, getAll };
+const getOne = async (id) => User
+  .findByPk(id, { attributes: ['id', 'displayName', 'email', 'image'] });
+
+module.exports = { login, create, getAll, getOne };

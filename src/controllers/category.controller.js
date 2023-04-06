@@ -6,4 +6,9 @@ const create = async (req, res) => {
   res.status(201).json(data);
 };
 
-module.exports = { create };
+const getAll = async (req, res) => {
+  const data = await categoryService.getAll();
+  res.status(200).json(data);
+};
+
+module.exports = { create, getAll };

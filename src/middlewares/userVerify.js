@@ -1,3 +1,4 @@
+const userSchema = require('../schemas/user.schema');
 const errorGenerate = require('../utils/errorGenerate');
 
 const userLoginVerify = (req, _res, next) => {
@@ -8,4 +9,14 @@ const userLoginVerify = (req, _res, next) => {
   next();
 };
 
-module.exports = { userLoginVerify };
+const userCreateVerify = (req, _res, next) => {
+  const { displayName, email, password } = req.body;
+
+  const { error } = userSchema({ displayName, email, password });
+
+  if (error) throw errorGenerate(400, error.message);
+
+  next();
+};
+
+module.exports = { userLoginVerify, userCreateVerify };

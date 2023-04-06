@@ -16,4 +16,11 @@ const login = async ({ email, password }) => {
   return auth.createToken(verify.dataValues.email);
 };
 
-module.exports = { login };
+const create = async ({ displayName, email, password, image = null }) => {
+  if (await userCheck(email)) throw errorGenerate(409, 'User already registered');
+
+  await User.create(displayName, email, password, image);
+  return auth.createToken(email);
+};
+
+module.exports = { login, create };

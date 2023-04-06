@@ -35,4 +35,4 @@ const getOne = async (id) => {
   return data;
 };
 
-module.exports = { login, create, getAll, getOne };
+module.exports = { login, create, getAll, getOne, userCheck };

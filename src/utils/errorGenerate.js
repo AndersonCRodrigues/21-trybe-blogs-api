@@ -1,3 +1,3 @@
-const errorGenerate = (code, messsage) => ({ status: code, messsage });
+const errorGenerate = (code, message) => ({ status: code, message });
 
 module.exports = errorGenerate;

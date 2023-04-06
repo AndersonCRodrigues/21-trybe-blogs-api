@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const categorySchema = Joi.object({
+const postSchema = Joi.object({
   title: Joi.string().required().label('name'),
   content: Joi.string().required().label('name'),
   categoryIds: Joi.array().min(1).required().label('name'),
@@ -10,4 +10,4 @@ const categorySchema = Joi.object({
   'any.empty': 'Some required fields are missing',
 });
 
-module.exports = categorySchema;
+module.exports = postSchema;

@@ -2,14 +2,13 @@ const jwt = require('jsonwebtoken');
 
 const secretkey = process.env.JWT_SECRET;
 const jwtConfig = {
-  expiresIn: '7d',
+  expiresIn: '1d',
   algorithm: 'HS256',
 };
 
-const createToken = (email, name) => {
+const createToken = (email) => {
   const data = {
     email,
-    name,
   };
 
   const token = jwt.sign(data, secretkey, jwtConfig);

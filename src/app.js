@@ -1,6 +1,7 @@
 const express = require('express');
 const loginRouter = require('./routes/loginRouter');
 const userRouer = require('./routes/userRouter');
+const categoryRouter = require('./routes/categoryRouter');
 
 // ...
 
@@ -16,6 +17,7 @@ app.use(express.json());
 // routers
 app.use('/login', loginRouter);
 app.use('/user', userRouer);
+app.use('/categories', categoryRouter);
 
 app.use(require('./middlewares/errorHandler'));
 // ...

@@ -16,15 +16,15 @@ const getUserId = async (token) => {
 };
 
 const create = async ({ title, content, categoryIds }, token) => {
-  const userId = getUserId(token);
+  const userId = await getUserId(token);
 
   const categories = await categoryService.getAll();
 
-  const result = categories.map((e) => categoryIds.includes(e.id));
-  if (!result.length) throw errorGenerate(400, 'one or more "categoryIds" not found');
+  const result = categories.every((e) => categoryIds.includes(e.id));
+  if (!result) throw errorGenerate(400, 'one or more "categoryIds" not found');
 
   const post = await BlogPost.create({ title, content, userId });
-  const postId = post[0].id;
+  const postId = post.dataValues.id;
   await createRelationship(postId, categoryIds);
   return post;
 };

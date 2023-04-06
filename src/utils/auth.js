@@ -18,7 +18,6 @@ const createToken = (email) => {
 
 const decodeToken = (token) => {
   const decode = jwt.verify(token, secretkey);
-
   return decode;
 };
 

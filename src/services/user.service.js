@@ -23,4 +23,6 @@ const create = async ({ displayName, email, password, image = null }) => {
   return auth.createToken(email);
 };
 
-module.exports = { login, create };
+const getAll = async () => User.findAll();
+
+module.exports = { login, create, getAll };

@@ -12,7 +12,7 @@ const userLoginVerify = (req, _res, next) => {
 const userCreateVerify = (req, _res, next) => {
   const { displayName, email, password } = req.body;
 
-  const { error } = userSchema({ displayName, email, password });
+  const { error } = userSchema.validate({ displayName, email, password });
 
   if (error) throw errorGenerate(400, error.message);
 

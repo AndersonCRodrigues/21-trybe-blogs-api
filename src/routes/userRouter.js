@@ -3,3 +3,5 @@ const logingController = require('../controllers/user.controller');
 const { userCreateVerify } = require('../middlewares/userVerify');
 
 router.post('/', userCreateVerify, logingController.create);
+
+module.exports = router;

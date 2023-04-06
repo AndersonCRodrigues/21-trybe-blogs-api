@@ -25,7 +25,14 @@ const create = async ({ displayName, email, password, image = null }) => {
 
 const getAll = async () => User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
 
-const getOne = async (id) => User
+const getOne = async (id) => {
+  const data = await User
   .findByPk(id, { attributes: ['id', 'displayName', 'email', 'image'] });
+
+  console.log(data);
+  if (!data) throw errorGenerate(404, 'User does not exist');
+
+  return data;
+};
 
 module.exports = { login, create, getAll, getOne };

@@ -20,7 +20,9 @@ const create = async ({ title, content, categoryIds }, token) => {
 
   const categories = await categoryService.getAll();
 
-  const result = categories.every((e) => categoryIds.includes(e.id));
+  const ids = categories.map((e) => e.id);
+  const result = categoryIds.every((e) => ids.includes(e));
+  console.log(result);
   if (!result) throw errorGenerate(400, 'one or more "categoryIds" not found');
 
   const post = await BlogPost.create({ title, content, userId });

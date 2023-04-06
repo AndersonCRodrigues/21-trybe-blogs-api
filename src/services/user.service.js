@@ -23,6 +23,6 @@ const create = async ({ displayName, email, password, image = null }) => {
   return auth.createToken(email);
 };
 
-const getAll = async () => User.findAll();
+const getAll = async () => User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
 
 module.exports = { login, create, getAll };

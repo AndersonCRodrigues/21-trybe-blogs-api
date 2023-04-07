@@ -88,4 +88,4 @@ const destroy = async (id, token) => {
   await BlogPost.destroy({ where: { id } });
 };
 
-module.exports = { create, getAll, getOne, update, destroy };
+module.exports = { create, getAll, getOne, update, destroy, getUserId };

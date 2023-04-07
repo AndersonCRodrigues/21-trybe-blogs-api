@@ -1,10 +1,17 @@
 const { User } = require('../models');
 const errorGenerate = require('../utils/errorGenerate');
 const auth = require('../utils/auth');
+const jwt = require('../utils/auth');
 
 const userCheck = async (email) => {
   const data = await User.findOne({ where: { email } });
   return data;
+};
+
+const getUserId = async (token) => {
+  const data = jwt.decodeToken(token);
+  const user = await userCheck(data.email);
+  return user.dataValues.id;
 };
 
 const login = async ({ email, password }) => {
@@ -36,7 +43,7 @@ const getOne = async (id) => {
 };
 
 const destroy = async (token) => {
-  const { id } = userCheck(token).dataValues;
+  const id = await getUserId(token);
   await User.destroy({ where: { id } });
 };
 

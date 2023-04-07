@@ -5,6 +5,7 @@ const { userCreateVerify } = require('../middlewares/userVerify');
 
 router.post('/', userCreateVerify, userController.create);
 router.get('/', tokenVerify, userController.getAll);
+router.delete('/me', tokenVerify, userController.destroy);
 router.get('/:id', tokenVerify, userController.getOne);
 
 module.exports = router;

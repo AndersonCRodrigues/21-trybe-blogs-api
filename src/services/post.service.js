@@ -46,4 +46,20 @@ const getAll = async () => {
   return data;
 };
 
-module.exports = { create, getAll };
+const getOne = async (id) => {
+  const data = await BlogPost.findByPk({
+    where: { id },
+    include: [
+      { model: User, as: 'user', attributes: ['id', 'displayName', 'email', 'image'] },
+      { model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
+    ],
+  });
+
+  return data;
+};
+
+module.exports = { create, getAll, getOne };

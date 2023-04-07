@@ -33,4 +33,10 @@ const getOne = async (req, res, next) => {
   }
 };
 
-module.exports = { login, create, getAll, getOne };
+const destroy = async (req, res) => {
+  const token = req.headers.authorization;
+  await userService.destroy(token);
+  res.status(204).json();
+};
+
+module.exports = { login, create, getAll, getOne, destroy };

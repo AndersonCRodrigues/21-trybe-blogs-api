@@ -89,11 +89,7 @@ const destroy = async (id, token) => {
   await BlogPost.destroy({ where: { id } });
 };
 
-const search = async (param) => {
-  let query = param;
-  if (!query) query = '';
-
-  return BlogPost.findAll({
+const search = async (query) => BlogPost.findAll({
     where: {
       title: { [Op.like]: `%${query}}%` },
       content: { [Op.like]: `%${query}}%` },
@@ -107,6 +103,5 @@ const search = async (param) => {
       },
     ],
   });
-};
 
 module.exports = { create, getAll, getOne, update, destroy, search };

@@ -38,4 +38,15 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getAll, getOne, update };
+const destroy = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const token = req.headers.authorization;
+    await postService.destroy(id, token);
+    res.status(204).json();
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { create, getAll, getOne, update, destroy };

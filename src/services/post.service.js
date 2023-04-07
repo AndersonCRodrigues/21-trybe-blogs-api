@@ -64,4 +64,23 @@ const getOne = async (id) => {
   return data;
 };
 
-module.exports = { create, getAll, getOne };
+const update = async ({ title, content }, id, token) => {
+    const userId = await getUserId(token);
+    const result = await getOne(id);
+
+    if (result.userId !== userId) throw errorGenerate(401, 'Unauthorized user');
+
+    return BlogPost.update({ title, content }, {
+      where: { id },
+      include: [
+        { model: User, as: 'user', attributes: ['id', 'displayName', 'email', 'image'] },
+        { model: Category,
+          as: 'categories',
+          attributes: ['id', 'name'],
+          through: { attributes: [] },
+        },
+      ],
+    });
+};
+
+module.exports = { create, getAll, getOne, update };

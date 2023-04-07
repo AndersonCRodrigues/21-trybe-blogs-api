@@ -33,9 +33,13 @@ const create = async ({ title, content, categoryIds }, token) => {
 
 const getAll = async () => {
   const data = await BlogPost.findAll({
-    includes: [
-      { model: User, as: 'user' },
-      { model: Category, as: 'categories' },
+    include: [
+      { model: User, as: 'user', attributes: ['id', 'displayName', 'email', 'image'] },
+      { model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
     ],
   });
 

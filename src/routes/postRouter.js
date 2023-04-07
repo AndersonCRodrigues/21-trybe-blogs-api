@@ -5,5 +5,6 @@ const { checkPostCreate } = require('../middlewares/postVerify');
 
 router.post('/', tokenVerify, checkPostCreate, postController.create);
 router.get('/', tokenVerify, postController.getAll);
+router.get('/:id', tokenVerify, postController.getOne);
 
 module.exports = router;

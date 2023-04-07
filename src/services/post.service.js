@@ -47,7 +47,7 @@ const getAll = async () => {
 };
 
 const getOne = async (id) => {
-  const data = await BlogPost.findByPk({
+  const data = await BlogPost.findOne({
     where: { id },
     include: [
       { model: User, as: 'user', attributes: ['id', 'displayName', 'email', 'image'] },
@@ -58,6 +58,8 @@ const getOne = async (id) => {
       },
     ],
   });
+
+  if (!data) throw errorGenerate(404, 'Post does not exist');
 
   return data;
 };

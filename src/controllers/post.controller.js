@@ -26,4 +26,15 @@ const getOne = async (req, res, next) => {
     next(e);
   }
 };
-module.exports = { create, getAll, getOne };
+
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const token = req.headers.authorization;
+    const data = await postService.update(req.body, +id, token);
+    res.status(200).json(data);
+  } catch (e) {
+    next(e);
+  }
+};
+module.exports = { create, getAll, getOne, update };

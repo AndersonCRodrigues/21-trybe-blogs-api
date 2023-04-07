@@ -35,4 +35,9 @@ const getOne = async (id) => {
   return data;
 };
 
-module.exports = { login, create, getAll, getOne, userCheck };
+const destroy = async (token) => {
+  const { id } = userCheck(token).dataValues;
+  await User.destroy({ where: { id } });
+};
+
+module.exports = { login, create, getAll, getOne, userCheck, destroy };

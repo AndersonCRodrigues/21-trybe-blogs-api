@@ -91,8 +91,10 @@ const destroy = async (id, token) => {
 
 const search = async (query) => BlogPost.findAll({
     where: {
-      title: { [Op.like]: `%${query}}%` },
-      content: { [Op.like]: `%${query}}%` },
+      [Op.or]: {
+        title: { [Op.like]: `%${query}%` },
+        content: { [Op.like]: `%${query}%` },
+      },
     },
     include: [
       { model: User, as: 'user', attributes: ['id', 'displayName', 'email', 'image'] },

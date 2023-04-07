@@ -7,5 +7,6 @@ router.post('/', tokenVerify, checkPostCreate, postController.create);
 router.get('/', tokenVerify, postController.getAll);
 router.get('/:id', tokenVerify, postController.getOne);
 router.put('/:id', tokenVerify, checkPostPut, postController.update);
+router.delete('/:id', tokenVerify, postController.destroy);
 
 module.exports = router;

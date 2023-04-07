@@ -70,17 +70,11 @@ const update = async ({ title, content }, id, token) => {
 
     if (result.userId !== userId) throw errorGenerate(401, 'Unauthorized user');
 
-    return BlogPost.update({ title, content }, {
-      where: { id },
-      include: [
-        { model: User, as: 'user', attributes: ['id', 'displayName', 'email', 'image'] },
-        { model: Category,
-          as: 'categories',
-          attributes: ['id', 'name'],
-          through: { attributes: [] },
-        },
-      ],
-    });
+    result.title = title;
+    result.content = content;
+    result.updated = new Date();
+    result.save();
+    return result;
 };
 
 module.exports = { create, getAll, getOne, update };

@@ -37,4 +37,5 @@ const update = async (req, res, next) => {
     next(e);
   }
 };
+
 module.exports = { create, getAll, getOne, update };

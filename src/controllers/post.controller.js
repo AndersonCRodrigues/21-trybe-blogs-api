@@ -11,4 +11,10 @@ const create = async (req, res, next) => {
   }
 };
 
-module.exports = { create };
+const getAll = async (req, res) => {
+  const data = await postService.getAll();
+
+  res.status(200).json(data);
+};
+
+module.exports = { create, getAll };

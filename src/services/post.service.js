@@ -64,12 +64,17 @@ const getOne = async (id) => {
   return data;
 };
 
+const checkUserId = async (id, token) => {
+  const userId = await getUserId(token);
+  const result = await getOne(id);
+
+  if (result.userId !== userId) throw errorGenerate(401, 'Unauthorized user');
+
+  return result;
+};
+
 const update = async ({ title, content }, id, token) => {
-    const userId = await getUserId(token);
-    const result = await getOne(id);
-
-    if (result.userId !== userId) throw errorGenerate(401, 'Unauthorized user');
-
+    const result = await checkUserId(id, token);
     result.title = title;
     result.content = content;
     result.updated = new Date();
@@ -77,4 +82,10 @@ const update = async ({ title, content }, id, token) => {
     return result;
 };
 
-module.exports = { create, getAll, getOne, update };
+const destroy = async (id, token) => {
+  await checkUserId(id, token);
+
+  await BlogPost.destroy({ where: { id } });
+};
+
+module.exports = { create, getAll, getOne, update, destroy };

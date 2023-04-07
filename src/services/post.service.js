@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory } = require('../models');
+const { BlogPost, PostCategory, Category, User } = require('../models');
 const userServie = require('./user.service');
 const categoryService = require('./category.service');
 const errorGenerate = require('../utils/errorGenerate');
@@ -31,4 +31,15 @@ const create = async ({ title, content, categoryIds }, token) => {
   return post;
 };
 
-module.exports = { create };
+const getAll = async () => {
+  const data = await BlogPost.findAll({
+    includes: [
+      { model: User, as: 'user' },
+      { model: Category, as: 'categories' },
+    ],
+  });
+
+  return data;
+};
+
+module.exports = { create, getAll };

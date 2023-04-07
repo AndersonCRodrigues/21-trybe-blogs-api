@@ -17,4 +17,10 @@ const getAll = async (req, res) => {
   res.status(200).json(data);
 };
 
-module.exports = { create, getAll };
+const getOne = async (req, res) => {
+  const { id } = req.params;
+  const data = await postService.getOne(+id);
+
+  res.status(200).json(data);
+};
+module.exports = { create, getAll, getOne };
